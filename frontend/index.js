@@ -1,8 +1,6 @@
 const boton = document.querySelector("button");
 const resultadoInpùt = document.querySelector("input");
 
-const url = "//http:/localhost/3000/api/v1";
-
 boton.addEventListener("click", () => {
     if (resultadoInpùt.value.length === 0) {
         alert("El campo esta basio");
@@ -25,6 +23,8 @@ boton.addEventListener("click", () => {
         .catch(error => alert(error));
 });
 
+
+// mejorar esta parte de codigo y acoplarlo al proyecto 
 
 // este es el input de texto y el boton que se conectara a la api par abuscar la musica que quieres o buscas
 

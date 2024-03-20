@@ -11,3 +11,5 @@ api.use('/api/v1', require('./rutas.js'));
 api.listen(port, () =>{
     console.log(`servidor corriendo por el puerto: ${port}`);
 });
+
+// posible fallo en el codigo buscar en caso de que sea el caso

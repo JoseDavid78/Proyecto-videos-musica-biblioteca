@@ -20,3 +20,6 @@ router.post("./crear", (req,res) => {
         }
     });
 });
+
+//mejorar codigo y ver lo errores
+// investigar si esta bien o mal ya que no se entiende del todo
