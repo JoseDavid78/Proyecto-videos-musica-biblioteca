@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: peachpuff;
+}
+h1{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    color: darkorange;
+}
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button{
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+    border-color: white;
+}
+
+
