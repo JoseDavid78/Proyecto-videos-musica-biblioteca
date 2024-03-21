@@ -19,3 +19,5 @@ try {
 } catch (error) {
 	console.error(error);
 }
+
+// esta es la primera opcion de la url (https://rapidapi.com/volodimir.kudriachenko/api/iTunes/) recuerda que tienen que ser peticiones a la api que te devuelvan el resultado de lo buscado

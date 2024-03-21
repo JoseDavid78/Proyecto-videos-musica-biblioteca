@@ -1,3 +1,12 @@
+// importante leer lo que hay en el drive  aun nos falta la api no la emos probado este link es por parte de linkeding es  un 
+ // mini tutorial de como usar las tokens de spotify (https://es.linkedin.com/pulse/consumiendo-la-api-de-spotify-en-angular-standalone-francisco-javier)
+// dos la base de datos esta incompleta y aun nos falata el como gestionarla ademas de que este bien relacionada
+// tres la interfaz que viene siendo el diseño visual de la pagina estamos en 0 ver como podemos usar el figma o canva para hacernos una idea
+// cuatro comprobar si las rutas estan bien hechas y si falta alguna otra
+// en fin tenemos mucho trabajo que hacer solo tenemos 3 dias para poder hacer todos los puntos que pone arriba 
+// creo que mañana dara los otros puntos asi que tenemos que comvinar lo de arriba con la inicializacion 
+// de lo que dara mañana morire XD
+
 const boton = document.querySelector("button");
 const resultadoInput = document.querySelector("input");
 const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";

@@ -23,3 +23,5 @@ boton.addEventListener("click", () => {
         })
         .catch(error => alert(error));
 });
+// esta es la Spotify que aun no sabesmos si funciona ya que no sabemos como ponerle token y toda la wea verlo en youtube o mostrarselo a chatgpt
+

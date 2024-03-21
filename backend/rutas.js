@@ -24,7 +24,7 @@ router.post("./crear", (req,res) => {
 
 router.post("./crear", (req, res) => {
     const nombre = req.body.nombre;
-    const sql = conexionMySQL.query("insert into musica values (default, '" + nombre + "')");
+    const sql = conexionMySQL.query("insert into videos values (default, '" + nombre + "')");
     conexionMySQL.query(sql,error => {
         if (error) {
             res.json({
@@ -39,7 +39,11 @@ router.post("./crear", (req, res) => {
         }
     });
 });
+
+
 //mejorar codigo y ver lo errores.
 // investigar si esta bien o mal ya que no se entiende del todo.
 
-//aun falta arreglar el codigo y acoplarlo bien ademas de mejorarlo.
+//aun falta arreglar el codigo y acoplarlo bien ademas de mejorarlo
+
+// el segundo es un esqueleto de los videos falta mejorarlo hacerlo despues de terminar la api de musica.
