@@ -15,3 +15,5 @@ conexionMySQL.connect(err => {
 });
 
 module.exports = conexionMySQL;
+
+// falta la gestion de errores por si ocurre un fallo o mejorar la comunicacion cliente servidor.

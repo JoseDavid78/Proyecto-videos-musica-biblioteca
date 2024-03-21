@@ -9,7 +9,6 @@ boton.addEventListener("click", () => {
         alert("El campo está vacío");
         return;
     }
-
     fetch(apiURL + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", {
         method: "GET",
         headers: {
