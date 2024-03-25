@@ -24,7 +24,8 @@ id int primary key auto_increment,
 nombre varchar (255),
 apellido varchar (255),
 email varchar (255),
-contraseña varchar (255)
+contraseña varchar (255),
+fecha_nacimiento date
 );
 
 insert into usuarios values (default, "", "", "","");

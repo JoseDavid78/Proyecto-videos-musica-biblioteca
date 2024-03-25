@@ -26,3 +26,4 @@
 
 // esta es la api de Spotyfi enconctrada en chrome aver si esn casa lo puede ver 
 // revisar e investigar cada parte del codigo e investigar como ponerlo en nuestro codigo/proyecto
+// https://rapidapi.com/category/Music es de donde saque la api
