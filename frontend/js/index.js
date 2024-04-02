@@ -4,7 +4,7 @@
 // tres la interfaz que viene siendo el diseño visual de la pagina estamos en 0 ver como podemos usar el figma o canva para hacernos una idea
 // cuatro comprobar si las rutas estan bien hechas y si falta alguna otra
 
-const boton = document.querySelector("button");
+const boton = document.querySelector("#music");
 const resultadoInput = document.querySelector("input");
 const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";
 
@@ -35,6 +35,21 @@ boton.addEventListener("click", () => {
             }, 3000);
         })
         .catch(error => alert(error));
+    const nombre_video = resultadoInput.value.trim();//
+    if (nombreVideo.length === 0) {
+        alert("El campo esta basio");
+        return;
+    }
+    fetch(apiurl + encodeURIComponent(nombre_video),{
+        method: "get",
+        headers: {
+            "x-rapidapi-host": "spotify23.p.rapidapi.com",
+            "x-rapidapi-key": "<TU_CLAVE_API_RAPIDAPI>",
+            "useQueryString": true
+        },
+        body: JSON.stringify({
+            nombre: resultadoInput.value
+    })
 });
 
 // mejorar esta parte de codigo y acoplarlo al proyecto
@@ -47,7 +62,7 @@ boton.addEventListener("click", () => {
 
 
 const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic';
-const boton2 = document.querySelector("button");
+const boton2 = document.querySelector("#vide");
 const inputResultado = document.querySelector("input");
 
 boton2.addEventListener("click", () => {
@@ -78,7 +93,7 @@ boton2.addEventListener("click", () => {
     .catch(error => alert(error)); 
 });
 
-const boton3 =document.querySelector("button");
+const boton3 =document.querySelector("#usua");
 
 boton3.addEventListener("click", () => {
     const nombreUsuario = resultadoInput.value.trim();
@@ -107,7 +122,7 @@ boton3.addEventListener("click", () => {
  
 });
 
-const boton_usuario = document.querySelector(".boton_in");
+const boton_usuario = document.querySelector("#boton_registro");
 boton_usuario.addEventListener("click", () => {
     const nombreUsuario = resultadoInput.value.trim();
 
@@ -132,12 +147,42 @@ boton_usuario.addEventListener("click", () => {
         }, 3000);
     })
     .catch(error => alert(error));
-    if (nombreUsuario >= inputResultado) {
-        boton = inputResultado;
-    } else {
-        console.log(inputResultado);
-    }
 });
+
+const boton_entrada = document.querySelector("#boton_entrada");
+boton_entrada.addEventListener("click", () => {
+    const entrada = resultadoInput.value.trim();
+
+    if (entrada.length == 0) {
+        alert("Los campos estan vacios o no coinsiden")
+        return;
+    }
+    fetch(url + encodeURIComponent(nombreUsuario),{
+        method: 'get',
+        headers: {
+
+        },
+        body:json.stringify({
+            nombre: resultadoInput.value
+        })
+    })
+
+    .then(res => res.json())
+    .then(msg => {
+        console.log(msg.mensaje);
+        setTimeout(() => {
+            location.reload();
+        }, 3000);
+    })
+    .catch(error => alert(error));
+});
+
+    
+
+
+
+
+
 
 // estos son los posibles botones con falta de ajustes y darle sentido a cada uno
 // aun hay que darle sentido a los inputs los nombres que le puse en el html y creo que faltan mas botones que no tienen codigo en js
