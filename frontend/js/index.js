@@ -250,10 +250,17 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
         });
     });
 }
-
-
 // estos son los posibles botones con falta de ajustes y darle sentido a cada uno
 // aun hay que darle sentido a los inputs los nombres que le puse en el html y creo que faltan mas botones que no tienen codigo en js
+
+
+
+
+
+
+
+
+
 
 
 

@@ -97,16 +97,24 @@ router.post('/login', async (req, res) => {
         handleError(re, error, "Error en el registro de usuario");
     }
 });
-
 // prototipo de login
-
 // aun falta acoplarlo y que sea coherente 
 
 
-
-
-
-
+router.post('./album', async (req,res) => {
+    try{
+        const numero_album = req.body.numero_album;
+        const nombre_album = req.bofy.nombre_album;
+        const tipo = req.body.tipo;
+        if (!numero_album || !nombre_album || !tipo) {
+            return res.status(200).json({status: 204, mensaje: "No existe el album o los campos estan bacios"});
+        }
+        await Mysqlconn.query("insert into albums values (default,?,?,?)", [numero_album,nombre_album,tipo]);
+        res.status(200).json({ status: 200, message: "Albun encontrado" });
+    }catch (error) {
+        handleError(re, error, "Error al colocar lo datos");
+    }
+});
 
 
 //mejorar codigo y ver lo errores.
@@ -117,3 +125,7 @@ router.post('/login', async (req, res) => {
 // el segundo es un esqueleto de los videos falta mejorarlo hacerlo despues de terminar la api de musica.
 // aun falta mas rutas para combinar mysql y visual basicamente la base de datos aun no se cuales pero lo averiguare
 // aun son prototipos no estan completos
+// url api de artista de la aplicacion dezzer https://api.deezer.com/search/artist?q=metallica
+// buscar sonicApi puede ser muy interesante
+// AI Vocal Remover este es tipo karaoke hay  otro mas
+// https://www.splitter.ai/ ese
