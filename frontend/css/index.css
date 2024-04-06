@@ -1,25 +1,146 @@
-*{
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
     margin: 0;
-    box-sizing: border-box;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    position: relative; /* Importante para posicionar el footer correctamente */
+    min-height: 100vh; /* Asegura que el cuerpo tenga al menos el alto de la ventana */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total */
 }
 
-body{
-    background-color: peachpuff;
-}
-h1{
+h1 {
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    color: darkorange;
-}
-form{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-button{
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 10px;
-    border-color: white;
+    padding-top: 50px;
 }
 
+/* Estilos de la barra de navegación */
+nav {
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.pestanas {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.pestanas button {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.pestanas button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.pestana {
+    display: none;
+    padding: 20px;
+}
+
+/* Estilos de los formularios */
+.formulario {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centra el contenido del formulario */
+    margin-bottom: 50px; /* Ajusta el margen inferior para evitar que los botones tapen el contenido */
+}
+
+.formulario h2 {
+    text-align: center;
+}
+
+.input-container {
+    margin-bottom: 20px;
+    text-align: center; /* Centra el contenido del input y del botón */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"] {
+    width: calc(100% - 20px); /* Agrega más espacio al input */
+    padding: 15px; /* Aumenta el espacio alrededor del texto del input */
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    margin-top: 5px;
+    text-align: center; /* Centra el texto dentro del input */
+}
+
+button[type="button"] {
+    width: calc(100% - 20px); /* Ajusta el ancho del botón */
+    padding: 15px; /* Aumenta el espacio alrededor del texto del botón */
+    border: none;
+    border-radius: 5px;
+    background-color: #1db954;
+    color: #fff;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #1ed760;
+}
+
+/* Estilos del pie de página */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;
+    text-align: center;
+}
+
+.foter {
+    display: flex;
+    justify-content: space-around;
+}
+
+.foter button {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #1db954;
+    color: #fff;    
+    cursor: pointer;
+}
+
+.footer-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1db954;
+    color: #fff;
+    cursor: pointer;
+}
+
+.footer-buttons button:hover {
+    background-color: #1ed760;
+}

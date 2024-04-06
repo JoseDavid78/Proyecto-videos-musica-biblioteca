@@ -1,80 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./index.js" defer></script>
-    <script src="./apis/api.music.js" defer></script>
-    <script src="./apis/apiSpotyfi.js" defer></script>
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/aparicion_pestañas.js" defer></script>
 </head>
 
 <body>
-    <h1>Musica</h1>
+    <h1>Música</h1>
     <nav>
 
     </nav>
-    <form class="formulario_prin">
-        <div>
-            <div class="musica">
-                <input type="text">
-                <label for="Musica" id="music">Musica</label>
-                <button type="button" id="music">Musica</button>
-            </div>
-            <div class="videos">
-                <label for="Videos" id="vide">Videos</label>
-                <input type="text">
-                <button type="button" id="vide">Videos</button>
-            </div>
-            <div class="usuarios">
-                <label for="Usuarios" id="usua">Usuarios</label>
-                <input type="text">
-                <button type="button" id="usua">Usuarios</button>
-            </div>
-        </div>    
-    </form>
-    <form class="registro">
-        <div>
-            <h1>Formularios de Registro</h1>
-            <div class="email">
-                <label for="Email" id="reg">Email</label>
-                <input type="email" id="inReg">
-            </div>
-            <div class="contraseña">
-                <label for="pass" id="labReg">password</label>
-                <input type="password" id="pasReg">
-            </div>
-            <div class="fecha">
-                <label for="fecha de nacimiento" id="fechReg">Fecha</label>
-                <input type="date">
-            </div>
-            <button type="button" id="boton_registro">Login</button>
-        </div>
-    </form>
+    <div class="pestanas">
+        <button onclick="mostrarPestana('registro')">Registro</button>
+        <button onclick="mostrarPestana('inicio')">Inicio de sesión</button>
+        <button onclick="mostrarPestana('busqueda')">Búsqueda</button>
+    </div>
 
-    <div class="entrada">
-        <h1>Inicio</h1>
-        <div class="Inicio">
-            <label for="Email" id="label_IN">Email</label>
-            <input type="email" id="Input_In">
-        </div>
-        <div class="contraseña">
-            <label for="password" id="label_con">Contraseña</label>
-            <input type="password" id="label_con">
-        </div>
-        <button type="button" id="boton_entrada">Iniciar</button>
+    <!-- Contenido de la pestaña de registro -->
+    <div id="pestana-registro" class="pestana">
+        <form class="formulario registro">
+            <h2>Formulario de Registro</h2>
+            <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+            <div class="input-container">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password">
+            </div>
+            <div class="input-container">
+                <label for="fecha">Fecha de nacimiento</label>
+                <input type="date" id="fecha">
+            </div>
+            <button type="button">Registrarse</button>
+        </form>
     </div>
+
+    <!-- Contenido de la pestaña de inicio de sesión -->
+    <div id="pestana-inicio" class="pestana">
+        <form class="formulario inicio-sesion">
+            <h2>Iniciar Sesión</h2>
+            <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+            <div class="input-container">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password">
+            </div>
+            <button type="button">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <!-- Contenido de la pestaña de búsqueda -->
+    <div id="pestana-busqueda" class="pestana">
+        <form class="formulario busqueda">
+            <h2>Búsqueda</h2>
+            <div class="input-container">
+                <label for="buscar">Buscar</label>
+                <input type="text" id="buscar">
+            </div>
+            <button type="button">Buscar</button>
+        </form>
+    </div>
+
+    <footer>
+        <div class="foter">
+            <button type="button" id="boton_contacto">Contáctanos</button>
+            <button type="button" id="boton_opcion">Opciones</button>
+        </div>
+    </footer>
+
+    <script src="./index.js" defer></script>
 </body>
-<footer>
-    <div class="foter">
-        <button type="button" id="boton_contacto">Contactanos</button>
-        <button type="button" id="boton_opcion">Opciones</button>
-    </div>
-</footer>
 
 </html>
+
 
 <!--
     Esta solo es una idea por encima sin nada configurado
@@ -83,4 +88,4 @@
     y verificar que todo este bien con chatgpt
 
     Analizar el codigo main de Armando aun no entiendo todo o nada asi que hacerlo por partes
--->
+--> 
