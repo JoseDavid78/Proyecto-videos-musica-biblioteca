@@ -1,4 +1,6 @@
- const axios = require('axios');
+// Api de posible consumo
+
+const axios = require('axios');
 
  const encodedParams = new URLSearchParams();
  encodedParams.set('userId', '<REQUIRED>');

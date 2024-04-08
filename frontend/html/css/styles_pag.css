@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    font-size: 0;
+}
+body{
+    background-color: black;
+}
+header{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(41, 40, 40);
+}
+.contenedorBotones{
+    display: flex;
+    justify-content: right;
+    text-align: center;
+}
+#btn{
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.contBoton2{
+cursor: pointer;
+background-color: #1db954;
+}
+

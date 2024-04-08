@@ -1,3 +1,5 @@
+// Busqueda de datos (musica)
+
 const express = require('express');
 const router = express.Router();
 
@@ -21,7 +23,7 @@ router.post("/crear", (req, res) => {
     });
 });
 
-
+// Busqueda de datos (videos)
 router.post("/crear", (req, res) => {
     const nombre = req.body.nombre;
     const sql = conexionMySQL.query("insert into videos values (default, '" + nombre2 + "')");
@@ -58,7 +60,7 @@ router.post("/leer", (req, res) => {
     });
 });
 
-
+// Busqueda de datos (Albums)
 router.post('/entrada', async (req, res)    => {
     try  {
         const email = req.body.reslutadoinput;

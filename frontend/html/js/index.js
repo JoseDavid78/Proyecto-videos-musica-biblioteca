@@ -77,7 +77,7 @@ boton2.addEventListener("click", () => {
         })
         .catch(error => alert(error));
 });
-
+// Boton de usuario
 const boton3 = document.querySelector("#usua");
 
 boton3.addEventListener("click", () => {
@@ -106,7 +106,7 @@ boton3.addEventListener("click", () => {
         .catch(error => alert(error));
 
 });
-
+// Boton de registro
 const boton_usuario = document.querySelector("#boton_registro");
 boton_usuario.addEventListener("click", () => {
     const nombreUsuario = resultadoInput.value.trim();
@@ -133,7 +133,7 @@ boton_usuario.addEventListener("click", () => {
         })
         .catch(error => alert(error));
 });
-
+// Boton de entrada
 const boton_entrada = document.querySelector("#boton_entrada");
 boton_entrada.addEventListener("click", () => {
     const entrada = resultadoInput.value.trim();

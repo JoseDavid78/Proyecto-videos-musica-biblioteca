@@ -1,3 +1,5 @@
+// Botones de Inicio desplegables
+
 function mostrarPestana(pestana) {
     // Ocultar todas las pestañas
     const todasLasPestanas = document.querySelectorAll('.pestana');

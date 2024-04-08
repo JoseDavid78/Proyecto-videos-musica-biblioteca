@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document1</title>
+    <link rel="stylesheet" href="./css/styles_pag.css">
+    <img src="image.jpg" alt="">
+</head>
+
+<body>
+    <header>
+        <div class="contenedorPrincipal"> 
+            <h1>Usuario</h1>
+            <div class="contenedorBotones"><!-- Este es contenedor derecho-->
+                <div class="contBoton1">
+                    <button type="button" id="btn1">Cuenta</button>
+                    <button type="button" id="btn1">Instalar Aplicaion</button>
+                </div>
+                <div class="constBoton2"><!-- Este es el contenedor izquierdo -->
+                    <h3>Cuenta</h3>
+                    <button type="button" id="profile">Profile</button>
+                    <button type="button"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="cont"> <!-- Este es el perfil personalizable (PROXIMAMENTE)-->
+        <div class="contenedor"></div>
+        <audio src="audio.mp3" controls autoplay loop></audio>
+    </div>
+    <div>
+        <h1>Video</h1> <!--Este sera el contenedor para el reproductor de videos -->
+        <label for="buscar" id="buscador">Buscar</label>
+        <button type="button" id="lupa"></button>
+        <div class="cont_videos">
+            <video controls> <!-- Este es el controlador de los videos-->
+                <source src="video.mp4">
+                <source src="video.webm">
+                <track src="subs.vtt" srclang="es">
+              </video>
+              <div class="cont_footer1">
+                <button type="button" id="resena1">Resena</button> <!--Botones de un footer falso(video)-->
+                <label for="reseña" id="reseña1">Reseña</label>
+                <input type="text" id="texto1">
+              </div>
+        </div>
+        <div>
+            <h1>Musica</h1> <!--Contenedor del controlador de musica-->
+            <label for="buscar"></label>
+            <button type="button" class="buscador2">Buscar</button>
+            <div>
+                <audio src="audio.mp3" controls autoplay loop></audio> <!--Controlado de musica-->
+            </div>
+            <div class="cont_footer2">
+                <label for="reseña" id="reseña2">Resena</label> <!--Botones de un footer falso(musica)-->
+                <input type="text" id="texto2">
+                <button type="button" id="resena1">Reseña</button>
+            </div>
+        </div>
+      
+    </div>
+</body>
+</html>
+
+<!--  https://lenguajehtml.com/html/multimedia/etiqueta-html-audio/  
+Este es la pagina donde te explica como funciona el controlador de audio
+-->

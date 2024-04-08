@@ -1,6 +1,10 @@
+Base de datos
+
 drop database if exists proyecto;
 create database proyecto;
 use proyecto;
+
+Tabla donde se almasenan datos consumidos de la api(musica)
 
 create table musica(
 id int primary key auto_increment,
@@ -11,6 +15,7 @@ fecha date
 
 insert into musica values (default, "","", "");
 
+Tabla donde se almasenan datos consumidos de la api(videos)
 
 create table videos(
 id int primary key auto_increment,
@@ -20,6 +25,8 @@ fecha date
 );
 
 insert into videos values (default, "", "","");
+
+Tabla Almasenamiento (Usuarios)
 
 create table usuarios(
 id int primary key auto_increment,
@@ -32,6 +39,8 @@ genero boolean
 );
 
 insert into usuarios values (default, "", "", "","",""); 
+
+Tabla Almasenamiento(Albums)
 
 create table albums(
 numero_album int primary key auto_increment,
