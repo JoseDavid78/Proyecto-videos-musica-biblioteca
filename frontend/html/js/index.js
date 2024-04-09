@@ -112,9 +112,10 @@ boton3.addEventListener("click", () => {
 const boton_usuario = document.querySelector("#boton_registro");
 
 boton_usuario.addEventListener("click", () => {
+    const resultadoInput2 = document.querySelector("#boton_regis")
     const nombreUsuario = resultadoInput.value.trim();
 
-    if (nombreCancion.length === 0) {
+    if (nombreUsuario.length === 0) {
         alert("El usuario es incorrecto")
         return;
     }
@@ -124,7 +125,7 @@ boton_usuario.addEventListener("click", () => {
 
         },
         body: json.stringify({
-            nombre: resultadoInput.value
+            nombre: resultadoInput2.value
         })
     })
         .then(res => res.json())
