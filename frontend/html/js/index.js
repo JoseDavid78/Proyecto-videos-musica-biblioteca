@@ -41,7 +41,6 @@ boton.addEventListener("click", () => {
 
 // este es el input de texto y el boton que se conectara a la api par abuscar la musica que quieres o buscas
 
-// pregunta a la ia (chatgpt) todo acerca del examen del lunes mandarle el codigo en un solo texto de cada carpeta para asi sabes en que es lo que fallamos y en que podemos mejorar
 // tambien que nos enseñe el codigo y q es lo que hace cada linea para aprender mejor
 // otra parte a resaltar seria la forma en la que hacer nuestro proyecto que nos de ideas e informacion de que es lo que debemos hacer para poder lograr el proyecto final
 
@@ -77,7 +76,9 @@ boton2.addEventListener("click", () => {
         })
         .catch(error => alert(error));
 });
+
 // Boton de usuario
+
 const boton3 = document.querySelector("#usua");
 
 boton3.addEventListener("click", () => {
@@ -104,10 +105,12 @@ boton3.addEventListener("click", () => {
             }, 3000);
         })
         .catch(error => alert(error));
-
 });
+
 // Boton de registro
+
 const boton_usuario = document.querySelector("#boton_registro");
+
 boton_usuario.addEventListener("click", () => {
     const nombreUsuario = resultadoInput.value.trim();
 
