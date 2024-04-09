@@ -1,4 +1,4 @@
-const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic';
+const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic'; // URL de la api?
 const options = {
 	method: 'POST',
 	headers: {

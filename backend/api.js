@@ -1,4 +1,4 @@
-// Abrir el servidor 
+// Abre el servidor 
 
 const express = require("express");
 const cors = require("cors");

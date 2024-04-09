@@ -1,6 +1,6 @@
 const boton = document.querySelector("button");
 const resultadoInput = document.querySelector("input");
-const apiURL = "https://spotify23.p.rapidapi.com/search/?q=";
+const apiURL = "https://spotify23.p.rapidapi.com/search/?q="; // Esta es la url de la api?
 
 boton.addEventListener("click", () => {
     const nombreCancion = resultadoInput.value.trim();
@@ -9,7 +9,7 @@ boton.addEventListener("click", () => {
         alert("El campo está vacío");
         return;
     }
-    fetch(apiURL + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", {
+    fetch(apiURL + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", { // que codigo es este?
         method: "GET",
         headers: {
             "x-rapidapi-host": "spotify23.p.rapidapi.com",

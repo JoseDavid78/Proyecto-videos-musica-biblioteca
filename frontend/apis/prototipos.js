@@ -9,7 +9,7 @@ function getArtista (req,res) {
         let artista_list = data.message.body.artista_list;
         res.status(200).send(artista_list); 
     }).catch(function (err) {
-        res.status(404).send({action: 'get Artista', message: "No se ha encontrado el Artista. ERROR:" + err})
+        res.status(404).send({action: 'get Artista', message: "No se ha encontrado el Artista. ERROR:" + err});
     })
 }
 // esta es la peticion para traer los artistas
@@ -22,7 +22,7 @@ function getTrack (res,req) {
         let track_list = data.message.body.track_list;
         res.status(200).send(track_list);
     }).catch(function (err){
-        res.status(404).send({action: 'get Tracks', message: "No se ahn encontrado tracks. ERROR:" + err})
+        res.status(404).send({action: 'get Tracks', message: "No se han encontrado tracks. ERROR:" + err});
     })
 }
 // esta es la petcion para traes tracks(aun no sabemos que es investigar)
@@ -38,7 +38,7 @@ function getArtistaAlbums(res,req) {
         updateTopArtista(artista_id, artista_nombre);
         res.status(200).send(album_list);
     }).catch(function (err) {
-        res.status(404).send({action: 'get Artista Albun', message: "No se han encontrado albums. ERROR:" + err})
+        res.status(404).send({action: 'get Artista Albun', message: "No se han encontrado albums. ERROR:" + err});
     })
 }
 // esta es la peticion que tra albums de un autor en concreto y mas especificos su musicas 

@@ -1,13 +1,11 @@
-// Botones de Inicio desplegables
+// Botones de Inicio
 
 function mostrarPestana(pestana) {
-    // Ocultar todas las pestañas
-    const todasLasPestanas = document.querySelectorAll('.pestana');
+    const todasLasPestanas = document.querySelectorAll('.pestana'); // Oculta todas las pestañas
     todasLasPestanas.forEach(pestana => {
         pestana.style.display = 'none';
     });
 
-    // Mostrar la pestaña seleccionada
-    const pestañaSeleccionada = document.getElementById('pestana-' + pestana);
+    const pestañaSeleccionada = document.getElementById('pestana-' + pestana); // Muestrar la pestaña seleccionada
     pestañaSeleccionada.style.display = 'block';
 }

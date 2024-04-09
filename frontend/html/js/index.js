@@ -15,7 +15,7 @@ boton.addEventListener("click", () => {
         alert("El campo esta basio");
         return;
     }
-    fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", {
+    fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", { // Codificado?
         method: "get",
         headers: {
             "x-rapidapi-host": "spotify23.p.rapidapi.com",
@@ -57,14 +57,14 @@ boton2.addEventListener("click", () => {
         return;
     }
     fetch(url + encodeURIComponent(nombreVideo), {
-        method: 'POST',
+        method: 'POST',                                                             // Esto solo es demostrativo no sirve.
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
             'X-RapidAPI-Key': '4c62be50e4msh41c41963f39f872p1a9105jsndd1693db3af4',
             'X-RapidAPI-Host': 'iTunesvolodimir-kudriachenkoV1.p.rapidapi.com'
         },
         body: JSON.stringify({
-            nombre: resultadoInput.value
+            nombre: resultadoInput.value                                                // Hasta aca
         })
     })
         .then(res => res.json())
@@ -300,3 +300,5 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
 
 // en caso de que sobre el tiempo intentar hacer la barra de reproduccion de sonido
 // botones de control de audio SVG, reproductor de musica SVG
+
+// Importante aun no arranca el servidor ver como hacerlo y en que estamos fallando
