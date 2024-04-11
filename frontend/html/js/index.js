@@ -4,6 +4,11 @@
 // tres la interfaz que viene siendo el diseño visual de la pagina estamos en 0 ver como podemos usar el figma o canva para hacernos una idea
 // cuatro comprobar si las rutas estan bien hechas y si falta alguna otra
 
+import {
+    validacionForm,
+    fetchData
+} from "./funciones";
+
 const boton = document.querySelector("#music");
 const resultadoInput = document.querySelector("input");
 const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";
@@ -79,44 +84,45 @@ boton2.addEventListener("click", () => {
 
 // Boton de usuario
 
-const boton3 = document.querySelector("#usua");
+const inputEmIn = document.querySelector("#emailIn");
+const inputPasIn = document.querySelector("#passwordIn");
+const formInicio = document.querySelector(".inicio-sesion")
 
-boton3.addEventListener("click", () => {
-    const nombreUsuario = resultadoInput.value.trim();
-
-    if (nombreUsuario.length === 0) {
-        alert("El usuario es incorrecto o el campo esta bacio")
-        return;
-    }
-    fetch(url + encodeURIComponent(nombreUsuario), {
-        method: 'GET',
-        headers: {
-
-        },
-        body: JSON.stringify({
-            nombre: resultadoInput.value
-        })
-    })
-        .then(res => res.json())
-        .then(msg => {
-            console.log(msg.mensaje);
-            setTimeout(() => {
-                location.reload();
-            }, 3000);
-        })
-        .catch(error => alert(error));
+formInicio.addEventListener("submit", (e) => {
+    if (!validacionForm(formInicio)) return;
+    fetchData(apiurl + "singIn", "post", {
+        inputEmIn: inputEmIn.value,
+        inputPasIn: inputPasIn.value,
+    }).then((res) => {
+        if (res.status === 500 || res.status === 204 || res.status === 401) {
+            showNotification("error", res.mensaje);
+        }
+        Swal.fire({
+            title: "Login correcto",
+            text: "Se ha guardado tu token de login en el LocalStorage (24h de validez). Haz click en Ok para acceder",
+            icon: "succes"
+        }).then(() => {
+            setDataInLocalStorage(login_token_key_ls, res.login_token)
+            location.href = "/app.html";
+        });
+    });
 });
+
+// aun falta el token de spotify
+// manejarlo desde las funciones 
+// y un html donde esten los albunes
 
 // Boton de registro
 
-const boton_usuario = document.querySelector("#boton_registro");
+const inputEmRe = document.querySelector("#emailRe");
+const inputPasRe = document.querySelector("#passwordRe");
+
 
 boton_usuario.addEventListener("click", () => {
-    const resultadoInput2 = document.querySelector("#boton_regis")
-    const nombreUsuario = resultadoInput.value.trim();
+    const EmailRe = inputEmRe.value.trim();
 
-    if (nombreUsuario.length === 0) {
-        alert("El usuario es incorrecto")
+    if (EmailRe.length === 0) {
+        alert("El campo esta basio")
         return;
     }
     fetch(url + encodeURIComponent(nombreUsuario), {
@@ -198,14 +204,14 @@ miFormatoDiv.forEach((formatoDiv) => {
                 `;
                     return;
                 }
-                miFormatoDiv.innerHTML = 
-                "<h4>Listado de albunes de bandas" + res.bandAlbuns[0].albumInfo.formato + "</h4>";
-                const uniqueBands = [ ...new Set(res.bandAlbuns.map(item => item.bandAlbuns)) ];
+                miFormatoDiv.innerHTML =
+                    "<h4>Listado de albunes de bandas" + res.bandAlbuns[0].albumInfo.formato + "</h4>";
+                const uniqueBands = [...new Set(res.bandAlbuns.map(item => item.bandAlbuns))];
                 for (let i = 0; i < uniqueBands.length; i++) {
-                  miFormatoDiv.innerHTML += `<b><a href="#" id="${uniqueBands[i]}">->${i + 1}- ${uniqueBands[i]}</a></b>`;
+                    miFormatoDiv.innerHTML += `<b><a href="#" id="${uniqueBands[i]}">->${i + 1}- ${uniqueBands[i]}</a></b>`;
                 }
                 miFormatoDiv.innerHTML += `<a href="./albuns.html">->Volver a mi biblioteca</a>`;
-                next(res.bandAlbuns, res.bandAlbuns[0].albumInfo.formato); 
+                next(res.bandAlbuns, res.bandAlbuns[0].albumInfo.formato);
             });
     });
 });
@@ -223,32 +229,32 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
                 showCancelButton: true,
                 confirmButtonColor: "cadetblue",
                 showCancelButtonColor: "rgb(255 95 95)",
-                confirmButtonText: "SI!" 
+                confirmButtonText: "SI!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     const login_token = getDataInLocalStorage(login_token_key_ls);
                     fetchData(apiURL + "deleteAlbumDB", "delete", { albumID: evento.target.id, formato }, false, login_token)
-                    .then((res) => {
-                        if (res.status === 401) {
-                            removeDataInLocalStoreage(spotify_token_key_ls);
-                            isSpotifyTokenLocalStorage();
-                            return;
-                        }
-                        if (res.status === 403) {
-                            removeDataInLocalStoreage(login_token_key_ls);
-                            isLoginTokenInLocalStorage();
-                            return;
-                        }
-                        if (res.status === 500) {
-                            showNotification("error", res.message);
-                            return;
-                        }
-                        Swal.fire({
-                            title: "album borrado",
-                            text: res.message,
-                            icon: "success"
-                        }).then(() => location.reload())
-                    });
+                        .then((res) => {
+                            if (res.status === 401) {
+                                removeDataInLocalStoreage(spotify_token_key_ls);
+                                isSpotifyTokenLocalStorage();
+                                return;
+                            }
+                            if (res.status === 403) {
+                                removeDataInLocalStoreage(login_token_key_ls);
+                                isLoginTokenInLocalStorage();
+                                return;
+                            }
+                            if (res.status === 500) {
+                                showNotification("error", res.message);
+                                return;
+                            }
+                            Swal.fire({
+                                title: "album borrado",
+                                text: res.message,
+                                icon: "success"
+                            }).then(() => location.reload())
+                        });
                 }
             });
         });
