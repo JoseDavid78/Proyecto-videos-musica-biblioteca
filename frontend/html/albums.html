@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div>
+          <h1>BandCampAPI
+            <i class="fa-solid fa-cog fa-spin hide"></i>
+          </h1>
+          <h3><a href="./app.html">-> Buscar albums de bandas!</a></h3>
+          <h3><a href="./albums.html">-> Ir a mis albums!</a></h3>
+        </div>
+        <div>
+          <button type="button" class="btn hide" id="btnSpotifyGetToken">Get Token API Spotify</button>
+          <button type="button" class="btn" id="btnCerrarSesion">Cerrar Sesión</button>
+        </div>
+      </header>
+      <main>
+        <h1>Mi Biblioteca de Álbums</h1>
+        <div class="myFormatos">
+          <div class="myCassettes">
+            <img src="./img/cassette.png" alt="cassette">
+            <h3 class="text-center" id="cassette"> Mis Cassettes</h3>
+          </div>
+          <div class="myVinyls7">
+            <img src="./img/vinyl7.png" alt="vinyl7">
+            <h3 class="text-center" id="vinilo7">Mis Vinilos 7"</h3>
+          </div>
+          <div class="myVinyls12">
+            <img src="./img/vinyl12.png" alt="vinyl12">
+            <h3 class="text-center" id="vinilo12">Mis Vinilos 12"</h3>
+          </div>
+          <div class="CDs">
+            <img src="./img/compact-disc.png" alt="compact-disc">
+            <h3 class="text-center" id="cd">Mis CD's</h3>
+          </div>
+        </div>
+        <h2 id="bandNameDiv"></h2>
+        <div id="paginationButtons"></div>
+        <div class="resultDivAlbums">
+          <template id="albumsTemplate">
+            <div class="album">
+              <div class="titleAlbumContainer">
+                <h4 class="centered-text"></h4>
+              </div>
+              <img src="" alt="">
+              <h6 class="type"></h6>
+              <h6 class="year"></h6>
+              <button class="btn btnAddAlbum"><i class="fa-solid fa-circle-minus"></i> Borrar de mi Biblioteca</button>
+            </div>
+          </template>
+        </div>
+      </main>
+</body>
+</html>
+
+<!-- Esto aun falta analizarlo y aprenderlo hay algunas cosas que aun no se-->

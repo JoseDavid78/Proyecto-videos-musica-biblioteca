@@ -107,10 +107,11 @@ formInicio.addEventListener("submit", (e) => {
         });
     });
 });
-
 // aun falta el token de spotify
 // manejarlo desde las funciones 
 // y un html donde esten los albunes
+
+
 
 // Boton de registro
 
