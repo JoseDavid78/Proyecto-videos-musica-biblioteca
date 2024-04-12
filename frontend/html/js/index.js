@@ -18,7 +18,7 @@ boton.addEventListener("click", () => {
     const nombreCancion = resultadoInput.value.trim();
 
     if (nombreCancion.length === 0) {
-        alert("El campo esta basio");
+        alert("No hay un token disponible");
         return;
     }
     fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", { // Codificado?

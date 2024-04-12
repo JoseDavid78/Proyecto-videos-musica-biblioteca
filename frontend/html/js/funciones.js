@@ -1,3 +1,7 @@
+const urlApiSpotifyAA = "https://api.spotify.com/v1/artists/0TnOYISbd1XYRBk9myaseg/albums \
+Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'";
+
+
 
 function validacionForm(form) {         // Funcion que valida el formulario
     let validacion = true;
@@ -110,17 +114,38 @@ function renderPaginationButtons(totalPages) {
 const botonGetTokenSpotify = document.querySelector("")
 
 botonGetTokenSpotify.addEventListener("click", getToken);
+function isSpotifyTokenLocalStorage() {
+    if (!isSpotifyTokenLocalStorage(spotify_token_key_ls)) {
+        botonGetTokenSpotify.classList.remove("hide");
+        showNotification(
+            "warning",
+            "No hay token de Spotify en el LS o ha caducado",
+            "Has click en el boton de arriba 'Get Token API Spotify'"
+        );
+        return;
+    }
+    botonGetTokenSpotify.classList.add("hide");
+}
+
+function isLoginTokenInLocalStorage() {
+    if (!isDataInLocalStorage(login_token_key_ls)) {
+        Swal.fire({
+            title: "Token de login invalido o ha caducado",
+            text: "Haz click en OK para añadir tus datos de acceso a la APP y renueva tu token",
+            icon: "warning"
+        }).then(()=>{
+            location.href="./index.html";
+        });
+    }
+}
 
 
-
-
-
-export {
-    validacionForm,
-    fetchData,
-    showAlbumsResultsHTML
-};
-
+ export {
+     validacionForm,
+     fetchData,
+     showAlbumsResultsHTML,
+     isLoginTokenInLocalStorage
+ };
 
 // aqui tambien falta analizar ciertas cosas aun no se todas las conecciones que tiene
 // solo se que hay un monton de cosas para el login 
