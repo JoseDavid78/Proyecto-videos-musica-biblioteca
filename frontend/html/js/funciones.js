@@ -1,4 +1,5 @@
-function validacionForm(form) {
+
+function validacionForm(form) {         // Funcion que valida el formulario
     let validacion = true;
     const inputs = form.querySelectorAll("input");
     inputs.forEach(input => {
@@ -11,7 +12,7 @@ function validacionForm(form) {
     return validacion;
 }
 
-async function fetchData(url, method, bodyData, spotifyToken, loginToken){
+async function fetchData(url, method, bodyData, spotifyToken, loginToken){     // funcion que valida el fetch
     try {
         toggleSpinner();
         const headers = { "Content-Type": "application/json" };
@@ -54,7 +55,7 @@ const bandasNombre = document.querySelector("bandNameDiv");
 const bandasGenero = document.querySelector("bandGenresDiv");
 const resultadoDivAlbums = document.querySelector(".resultDivAlbums");
 
-function showAlbumsResultsHTML(alb, bandN, genres, format) {
+function showAlbumsResultsHTML(alb, bandN, genres, format) {       //Funcion que valida los albums
     albums = alb;
     bandasNom = bandN;
     generos = genres;

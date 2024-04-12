@@ -5,9 +5,10 @@
 // cuatro comprobar si las rutas estan bien hechas y si falta alguna otra
 
 import {
-    validacionForm,
-    fetchData
-} from "./funciones";
+    validacionForm, 
+    fetchData, 
+    showAlbumsResultsHTML
+} from "./funciones.js";
 
 const boton = document.querySelector("#music");
 const resultadoInput = document.querySelector("input");
@@ -82,13 +83,13 @@ boton2.addEventListener("click", () => {
         .catch(error => alert(error));
 });
 
-// Boton de usuario
+// Boton de Inicio
 
 const inputEmIn = document.querySelector("#emailIn");
 const inputPasIn = document.querySelector("#passwordIn");
-const formInicio = document.querySelector(".inicio-sesion")
+const formInicio = document.querySelector(".inicio-sesion");
 
-formInicio.addEventListener("submit", (e) => {
+formInicio.addEventListener("submit", (e) => {     // Falta algo?
     if (!validacionForm(formInicio)) return;
     fetchData(apiurl + "singIn", "post", {
         inputEmIn: inputEmIn.value,
