@@ -53,6 +53,7 @@ let albums;
 let bandasNom;
 let generos;
 
+// hay un error de package.json ver que error es y subsanarlo
 
 const albumsTemplate = document.querySelector("#albumsTemplate");
 const bandasNombre = document.querySelector("bandNameDiv");
@@ -127,6 +128,7 @@ function isSpotifyTokenLocalStorage() {
     botonGetTokenSpotify.classList.add("hide");
 }
 
+
 function isLoginTokenInLocalStorage() {
     if (!isDataInLocalStorage(login_token_key_ls)) {
         Swal.fire({
@@ -139,13 +141,36 @@ function isLoginTokenInLocalStorage() {
     }
 }
 
+function SpotifyService(_httpClient) {
+    this._httpClient = _httpClient;
+    this.credentials = {
+        clienId: '',
+        clientSecret:'',
+        accessToken: ''
+    };
+    this.poolURLS = {
+        authorize: 'https://accounts.spotify.com/es-ES/authorize?client_id=' +
+            this.credentials.clienId + '&response_type=token' +
+            '&redirect_uri=' + encodeURIComponent('/#/') +
+            '&expires_in=3600',
+        refreshAccessToken: 'https://accounts.spotify.com/api/token'
+    };
+    this.upDateToken();
+}
 
- export {
-     validacionForm,
-     fetchData,
-     showAlbumsResultsHTML,
-     isLoginTokenInLocalStorage
- };
+
+//  export {
+//      validacionForm,
+//      fetchData,
+//      showAlbumsResultsHTML,
+//      isLoginTokenInLocalStorage,
+//      SpotifyService // posible funcion token
+//  };
+
+ module.exports = validacionForm;
+ module.exports = fetchData;
+ module.exports = showAlbumsResultsHTML;
+ module.exports = isLoginTokenInLocalStorage;
 
 // aqui tambien falta analizar ciertas cosas aun no se todas las conecciones que tiene
 // solo se que hay un monton de cosas para el login 

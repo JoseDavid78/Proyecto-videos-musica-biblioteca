@@ -62,22 +62,22 @@ router.post("/leer", (req, res) => {
 
 // Busqueda de datos (Albums)
 router.post('/entrada', async (req, res) => {
-    try  {
+    try {
         const email = req.body.reslutadoinput;
         const contrasena = req.body.reslutadoinput2;
         if (!email || !contrasena) {
             return res.status(200).json({ status: 204, mensaje: "Ningun campo puede estar vacion" });
         }
         const result = await Mysqlconn.query("select * from usuarios where email = ?", [email]);
-        if (result.length > 0 ) {
+        if (result.length > 0) {
             if (bcrypt.compareSync(contrasena, result[0].contrasena)) {
-                const login_token =jwt.sing({ email }, process.env.secret_key, { expirestIn: "24h" });
+                const login_token = jwt.sing({ email }, process.env.secret_key, { expirestIn: "24h" });
                 return res.status(200).json({ status: 200, login_token });
             }
         }
         res.status(401).json({ status: 401, message: "Datos de entrada incorrectos" });
     } catch (error) {
-        return res.status(500).json({ status: 500, message: "Error en el servidor" + error  });
+        return res.status(500).json({ status: 500, message: "Error en el servidor" + error });
     }
 });
 // prototipo de entrada
@@ -88,11 +88,11 @@ router.post('/login', async (req, res) => {
         const email = req.body.reslutadoinput4;
         const contrasena = req.body.reslutadoinput5;
         if (!nombre || !email || !contrasena) {
-            return res.status(200).json({ status: 204, message: "Ningun campo puede estar vacio"});
+            return res.status(200).json({ status: 204, message: "Ningun campo puede estar vacio" });
         }
         const id = uuid_v4();
-        const salt = bcrypt.genSaltSync(10);4
-        const hashPassword = bcrypt.hashSync(contrasena,salt);
+        const salt = bcrypt.genSaltSync(10); 4
+        const hashPassword = bcrypt.hashSync(contrasena, salt);
         await Mysqlconn.query("insert into usuarios values (?, ?, ?, ?, default)", [id, email, nombre, hashPassword]);
         res.status(200).json({ status: 200, message: "Usuario registrado correctamente" });
     } catch (error) {
@@ -103,20 +103,43 @@ router.post('/login', async (req, res) => {
 // aun falta acoplarlo y que sea coherente 
 
 
-router.post('./album', async (req,res) => {
-    try{
+router.post('./album', async (req, res) => {
+    try {
         const numero_album = req.body.numero_album;
         const nombre_album = req.bofy.nombre_album;
         const tipo = req.body.tipo;
         if (!numero_album || !nombre_album || !tipo) {
-            return res.status(200).json({status: 204, mensaje: "No existe el album o los campos estan bacios"});
+            return res.status(200).json({ status: 204, mensaje: "No existe el album o los campos estan bacios" });
         }
-        await Mysqlconn.query("insert into albums values (default, ?, ?, ? )", [numero_album,nombre_album,tipo]);
+        await Mysqlconn.query("insert into albums values (default, ?, ?, ? )", [numero_album, nombre_album, tipo]);
         res.status(200).json({ status: 200, message: "Albun encontrado" });
-    }catch (error) {
+    } catch (error) {
         handleError(re, error, "Error al colocar lo datos");
     }
 });
+
+router.post("/singUp", async (req, res) => {
+    try {
+        const userName = req.body.sigUpUsuerName;
+        const email = req.body.singUpEmail;
+        const password = req.body.sigUpPass;
+        if (!userName || !email || !password) {
+            return res.status(200).json({ status: 409, message: "Ningun campo puede estar vacio" });
+        }
+        const result = await Mysqlconn.query("select * from usuarios where email = ?", [email]);
+        if (result.length > 0) {
+            return res.status(200).json({ status: 409, message: "Email registrado"});
+        }
+        const id = uuid_v4();
+        const salt = bcrypt.genSaltSync(10);4
+        const hashPaswordd = bcrypt.hashSync(password,salt);
+        await Mysqlconn.query("insert into usuarios values (?,?,?,?, default)", [id, email, userName, hashPaswordd]);
+        res.status(200).json({status: 200, message: "Usuario registrado correctamente"}); 
+    } catch (error) {
+        handleError(res, error, "Error al registrarse");
+    }
+});
+
 
 module.exports = router;
 //mejorar codigo y ver lo errores.
