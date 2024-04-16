@@ -2,144 +2,77 @@
 
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { v4: uuid_v4 } = require('uuid');
 
 const conexionMySQL = require('./conneccionMySQL');
 
-router.post("/crear", (req, res) => {
-    const nombre = req.body.nombre;
-    const sql = conexionMySQL.query("insert into musica values (default, '" + nombre + "')");
-    conexionMySQL.query(sql, error => {
-        if (error) {
-            res.json({
-                "status": 500,
-                "mensaje": "Error en la insercion de datos. ERROR: " + error
-            });
-        } else {
-            res.json({
-                "status": 200,
-                "mensaje": "Dato insertado correctamente"
-            });
-        }
-    });
-});
-
-// Busqueda de datos (videos)
-router.post("/crear", (req, res) => {
-    const nombre2 = req.body.nombre;
-    const sql = conexionMySQL.query("insert into videos values (default, '" + nombre2 + "')");
-    conexionMySQL.query(sql, error => {
-        if (error) {
-            res.json({
-                "status": 500,
-                "mensaje": "Error en la insercion de datos. ERROR: " + error
-            });
-        } else {
-            res.json({
-                "status": 200,
-                "mensaje": "Dato insertado correctamente"
-            });
-        }
-    });
-});
-
-router.post("/leer", (req, res) => {
-    const nombre = req.body.nombre;
-    const sql = conexionMySQL.query("insert into usuarios values (default, '" + nombre1 + "')");
-    conexionMySQL.query(sql, error => {
-        if (error) {
-            res.json({
-                "status": 500,
-                "mensaje": "Error en la insercion de datos. ERROR: " + error
-            });
-        } else {
-            res.json({
-                "status": 200,
-                "mensaje": "Datos insertados correctamente"
-            });
-        }
-    });
-});
-
-// Busqueda de datos (Albums)
-router.post('/entrada', async (req, res) => {
+// Crear nueva canción
+router.post("/musica", async (req, res) => {
     try {
-        const email = req.body.reslutadoinput;
-        const contrasena = req.body.reslutadoinput2;
-        if (!email || !contrasena) {
-            return res.status(200).json({ status: 204, mensaje: "Ningun campo puede estar vacion" });
+        const { nombre } = req.body;
+        if (!nombre) {
+            return res.status(400).json({ status: 400, mensaje: "El nombre de la canción es obligatorio" });
         }
-        const result = await Mysqlconn.query("select * from usuarios where email = ?", [email]);
-        if (result.length > 0) {
-            if (bcrypt.compareSync(contrasena, result[0].contrasena)) {
-                const login_token = jwt.sing({ email }, process.env.secret_key, { expirestIn: "24h" });
-                return res.status(200).json({ status: 200, login_token });
-            }
-        }
-        res.status(401).json({ status: 401, message: "Datos de entrada incorrectos" });
+        await conexionMySQL.query("INSERT INTO musica (nombre) VALUES (?)", [nombre]);
+        res.status(200).json({ status: 200, mensaje: "Canción creada correctamente" });
     } catch (error) {
-        return res.status(500).json({ status: 500, message: "Error en el servidor" + error });
+        res.status(500).json({ status: 500, mensaje: "Error en la inserción de datos. ERROR: " + error });
     }
 });
-// prototipo de entrada
 
+// Crear nuevo video
+router.post("/videos", async (req, res) => {
+    try {
+        const { nombre } = req.body;
+        if (!nombre) {
+            return res.status(400).json({ status: 400, mensaje: "El nombre del video es obligatorio" });
+        }
+        await conexionMySQL.query("INSERT INTO videos (nombre) VALUES (?)", [nombre]);
+        res.status(200).json({ status: 200, mensaje: "Video creado correctamente" });
+    } catch (error) {
+        res.status(500).json({ status: 500, mensaje: "Error en la inserción de datos. ERROR: " + error });
+    }
+});
+
+// Crear nuevo usuario
+router.post("/usuarios", async (req, res) => {
+    try {
+        const { nombre, apellido, email, contraseña, fecha_nacimiento, genero } = req.body;
+        if (!nombre || !apellido || !email || !contraseña || !fecha_nacimiento || !genero) {
+            return res.status(400).json({ status: 400, mensaje: "Todos los campos son obligatorios" });
+        }
+        const hashPassword = await bcrypt.hash(contraseña, 10);
+        await conexionMySQL.query("INSERT INTO usuarios (nombre, apellido, email, contraseña, fecha_nacimiento, genero) VALUES (?, ?, ?, ?, ?, ?)", 
+            [nombre, apellido, email, hashPassword, fecha_nacimiento, genero]);
+        res.status(200).json({ status: 200, mensaje: "Usuario registrado correctamente" });
+    } catch (error) {
+        res.status(500).json({ status: 500, mensaje: "Error en el registro de usuario. ERROR: " + error });
+    }
+});
+
+// Iniciar sesión
 router.post('/login', async (req, res) => {
     try {
-        const nombre = req.body.reslutadoinput3;
-        const email = req.body.reslutadoinput4;
-        const contrasena = req.body.reslutadoinput5;
-        if (!nombre || !email || !contrasena) {
-            return res.status(200).json({ status: 204, message: "Ningun campo puede estar vacio" });
+        const { email, contraseña } = req.body;
+        if (!email || !contraseña) {
+            return res.status(400).json({ status: 400, mensaje: "Email y contraseña son obligatorios" });
         }
-        const id = uuid_v4();
-        const salt = bcrypt.genSaltSync(10); 4
-        const hashPassword = bcrypt.hashSync(contrasena, salt);
-        await Mysqlconn.query("insert into usuarios values (?, ?, ?, ?, default)", [id, email, nombre, hashPassword]);
-        res.status(200).json({ status: 200, message: "Usuario registrado correctamente" });
+        const usuario = await conexionMySQL.query("SELECT * FROM usuarios WHERE email = ?", [email]);
+        if (usuario.length === 0) {
+            return res.status(404).json({ status: 404, mensaje: "Usuario no encontrado" });
+        }
+        const match = await bcrypt.compare(contraseña, usuario[0].contraseña);
+        if (!match) {
+            return res.status(401).json({ status: 401, mensaje: "Contraseña incorrecta" });
+        }
+        const token = jwt.sign({ id: usuario[0].id, email: usuario[0].email }, process.env.SECRET_KEY, { expiresIn: '1h' });
+        res.status(200).json({ status: 200, token });
     } catch (error) {
-        handleError(re, error, "Error en el registro de usuario");
+        res.status(500).json({ status: 500, mensaje: "Error en el servidor. ERROR: " + error });
     }
 });
-// prototipo de login
-// aun falta acoplarlo y que sea coherente 
-
-
-router.post('./album', async (req, res) => {
-    try {
-        const numero_album = req.body.numero_album;
-        const nombre_album = req.bofy.nombre_album;
-        const tipo = req.body.tipo;
-        if (!numero_album || !nombre_album || !tipo) {
-            return res.status(200).json({ status: 204, mensaje: "No existe el album o los campos estan bacios" });
-        }
-        await Mysqlconn.query("insert into albums values (default, ?, ?, ? )", [numero_album, nombre_album, tipo]);
-        res.status(200).json({ status: 200, message: "Albun encontrado" });
-    } catch (error) {
-        handleError(re, error, "Error al colocar lo datos");
-    }
-});
-
-router.post("/singUp", async (req, res) => {
-    try {
-        const userName = req.body.sigUpUsuerName;
-        const email = req.body.singUpEmail;
-        const password = req.body.sigUpPass;
-        if (!userName || !email || !password) {
-            return res.status(200).json({ status: 409, message: "Ningun campo puede estar vacio" });
-        }
-        const result = await Mysqlconn.query("select * from usuarios where email = ?", [email]);
-        if (result.length > 0) {
-            return res.status(200).json({ status: 409, message: "Email registrado"});
-        }
-        const id = uuid_v4();
-        const salt = bcrypt.genSaltSync(10);4
-        const hashPaswordd = bcrypt.hashSync(password,salt);
-        await Mysqlconn.query("insert into usuarios values (?,?,?,?, default)", [id, email, userName, hashPaswordd]);
-        res.status(200).json({status: 200, message: "Usuario registrado correctamente"}); 
-    } catch (error) {
-        handleError(res, error, "Error al registrarse");
-    }
-});
-
 
 module.exports = router;
 //mejorar codigo y ver lo errores.
