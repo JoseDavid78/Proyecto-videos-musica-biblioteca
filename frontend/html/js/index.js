@@ -61,7 +61,7 @@ boton2.addEventListener("click", () => {
     const nombreVideo = inputResultado.value.trim();
 
     if (nombreVideo.length === 0) {
-        alert("Por favor, introduce un video.");
+        alert("Por favor, introduce el nombre de un video.");
         return;
     }
 
@@ -203,7 +203,7 @@ miFormatoDiv.forEach((formatoDiv) => {
     });
 });
 
-// Prototipo de borrado de álbumes/música/vídeo
+// Borrado de álbumes/música/vídeo
 function deleteAlbumDB(resultDivAlbuns, formato) {
     const btnaddalbun = resultDivAlbuns.querySelectorAll("./albun_boton");
     btnaddalbun.forEach((btn) => {
@@ -247,3 +247,7 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
     });
 
 }
+
+
+// Aun falta completar el codigo en siertas partes y convinarlo con el backen
+// Y aun no tenemos el token ni al Api de spotify
