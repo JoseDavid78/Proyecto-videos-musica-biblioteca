@@ -4,192 +4,177 @@
 // tres la interfaz que viene siendo el diseño visual de la pagina estamos en 0 ver como podemos usar el figma o canva para hacernos una idea
 // cuatro comprobar si las rutas estan bien hechas y si falta alguna otra
 
+// Importar las funciones necesarias
 import {
-    validacionForm, 
-    fetchData, 
-    showAlbumsResultsHTML
+    validacionForm,
+    fetchData,
+    showNotification,
+    setDataInLocalStorage,
+    removeDataInLocalStorage,
+    getDataInLocalStorage
 } from "./funciones.js";
 
+// Seleccionar elementos del DOM
 const boton = document.querySelector("#music");
-const resultadoInput = document.querySelector("input");
-const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";
+const resultadoInput = document.querySelector("#cancion");
+const boton2 = document.querySelector("#vide");
+const inputResultado = document.querySelector("#video");
+const inputEmIn = document.querySelector("#emailIn");
+const inputPasIn = document.querySelector("#passwordIn");
+const inputEmRe = document.querySelector("#emailRe");
+const inputPasRe = document.querySelector("#passwordRe");
+const botonUsuario = document.querySelector("#boton_usuario");
+const botonEntrada = document.querySelector("#boton_entrada");
+const miFormatoDiv = document.querySelectorAll(".formato-div");
 
+// URL de la API de Spotify y de iTunes
+const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";
+const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic';
+
+// Evento clic para buscar canciones
 boton.addEventListener("click", () => {
     const nombreCancion = resultadoInput.value.trim();
 
     if (nombreCancion.length === 0) {
-        alert("No hay un token disponible");
+        alert("Por favor, introduce una canción.");
         return;
     }
-    fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", { // Codificado?
+
+    fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", {
         method: "get",
         headers: {
             "x-rapidapi-host": "spotify23.p.rapidapi.com",
             "x-rapidapi-key": "<TU_CLAVE_API_RAPIDAPI>",
             "useQueryString": true
-        },
-        body: JSON.stringify({
-            nombre: resultadoInput.value
-        })
+        }
     })
-
-        .then(res => res.json())
-        .then(msg => {
-            console.log(msg.mensaje);
-            setTimeout(() => {
-                location.reload();
-            }, 3000);
-        })
-        .catch(error => alert(error));
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        // Procesar la respuesta aquí
+    })
+    .catch(error => alert(error));
 });
 
-// mejorar esta parte de codigo y acoplarlo al proyecto
-
-// este es el input de texto y el boton que se conectara a la api par abuscar la musica que quieres o buscas
-
-// tambien que nos enseñe el codigo y q es lo que hace cada linea para aprender mejor
-// otra parte a resaltar seria la forma en la que hacer nuestro proyecto que nos de ideas e informacion de que es lo que debemos hacer para poder lograr el proyecto final
-
-
-const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic';
-const boton2 = document.querySelector("#vide");
-const inputResultado = document.querySelector("input");
-
+// Evento clic para buscar vídeos
 boton2.addEventListener("click", () => {
-    const nombreVideo = resultadoInput.value.trim();
+    const nombreVideo = inputResultado.value.trim();
 
     if (nombreVideo.length === 0) {
-        alert("El campo esta basio")
+        alert("Por favor, introduce un video.");
         return;
     }
+
     fetch(url + encodeURIComponent(nombreVideo), {
-        method: 'POST',                                                             // Esto solo es demostrativo no sirve.
+        method: 'POST',
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
             'X-RapidAPI-Key': '4c62be50e4msh41c41963f39f872p1a9105jsndd1693db3af4',
             'X-RapidAPI-Host': 'iTunesvolodimir-kudriachenkoV1.p.rapidapi.com'
-        },
-        body: JSON.stringify({
-            nombre: resultadoInput.value                                                // Hasta aca
-        })
+        }
     })
-        .then(res => res.json())
-        .then(msg => {
-            console.log(msg.mensaje);
-            setTimeout(() => {
-                location.reload();
-            }, 3000);
-        })
-        .catch(error => alert(error));
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        // Procesar la respuesta aquí
+    })
+    .catch(error => alert(error));
 });
 
-// Boton de Inicio
+// Evento de inicio de sesión
+formInicio.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-const inputEmIn = document.querySelector("#emailIn");
-const inputPasIn = document.querySelector("#passwordIn");
-const formInicio = document.querySelector(".inicio-sesion");
-
-formInicio.addEventListener("submit", (e) => {     // Falta algo?
     if (!validacionForm(formInicio)) return;
+
     fetchData(apiurl + "singIn", "post", {
         inputEmIn: inputEmIn.value,
         inputPasIn: inputPasIn.value,
-    }).then((res) => {
+    })
+    .then((res) => {
         if (res.status === 500 || res.status === 204 || res.status === 401) {
             showNotification("error", res.mensaje);
+            return;
         }
+
         Swal.fire({
-            title: "Login correcto",
-            text: "Se ha guardado tu token de login en el LocalStorage (24h de validez). Haz click en Ok para acceder",
-            icon: "succes"
+            title: "Inicio de sesión correcto",
+            text: "Tu token de inicio de sesión se ha guardado en el LocalStorage (validez de 24 horas). Haz clic en OK para acceder.",
+            icon: "success"
         }).then(() => {
-            setDataInLocalStorage(login_token_key_ls, res.login_token)
+            setDataInLocalStorage(login_token_key_ls, res.login_token);
             location.href = "/app.html";
         });
-    });
+    })
+    .catch(error => alert(error));
 });
-// aun falta el token de spotify
-// manejarlo desde las funciones 
-// y un html donde esten los albunes
 
+// Evento de registro de usuario
+botonUsuario.addEventListener("click", () => {
+    const emailRe = inputEmRe.value.trim();
 
-
-// Boton de registro
-
-const inputEmRe = document.querySelector("#emailRe");
-const inputPasRe = document.querySelector("#passwordRe");
-
-
-boton_usuario.addEventListener("click", () => {
-    const EmailRe = inputEmRe.value.trim();
-
-    if (EmailRe.length === 0) {
-        alert("El campo esta basio")
+    if (emailRe.length === 0) {
+        alert("Por favor, introduce tu email.");
         return;
     }
-    fetch(url + encodeURIComponent(nombreUsuario), {
+
+    fetch(url, {
         method: 'get',
         headers: {
-
+            // Aquí van las cabeceras necesarias
         },
-        body: json.stringify({
-            nombre: resultadoInput2.value
+        body: JSON.stringify({
+            nombre: inputPasRe.value
         })
     })
-        .then(res => res.json())
-        .then(msg => {
-            console.log(msg.mensaje);
-            setTimeout(() => {
-                location.reload();
-            }, 3000);
-        })
-        .catch(error => alert(error));
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        // Procesar la respuesta aquí
+    })
+    .catch(error => alert(error));
 });
-// Boton de entrada
-const boton_entrada = document.querySelector("#boton_entrada");
-boton_entrada.addEventListener("click", () => {
+
+// Evento de entrada
+botonEntrada.addEventListener("click", () => {
     const entrada = resultadoInput.value.trim();
 
     if (entrada.length == 0) {
-        alert("Los campos estan vacios o no coinsiden")
+        alert("Por favor, introduce una entrada.");
         return;
     }
-    fetch(url + encodeURIComponent(nombreUsuario), {
+
+    fetch(url, {
         method: 'get',
         headers: {
-
+            // Aquí van las cabeceras necesarias
         },
-        body: json.stringify({
+        body: JSON.stringify({
             nombre: resultadoInput.value
         })
     })
-
-        .then(res => res.json())
-        .then(msg => {
-            console.log(msg.mensaje);
-            setTimeout(() => {
-                location.reload();
-            }, 3000);
-        })
-        .catch(error => alert(error));
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        // Procesar la respuesta aquí
+    })
+    .catch(error => alert(error));
 });
 
-
-// posible boton que devuelva la musica / video
-
+// Evento para mostrar álbumes de bandas
 miFormatoDiv.forEach((formatoDiv) => {
     formatoDiv.addEventListener("click", e => {
         isSpotifyTokenLocalStorage();
         const loginToken = getDataInLocalStorage(login_token_key_ls);
-        fetchData(apiURL + "getAlbumsDB?formato=" + e.targeta.id, "get", false, false, loginToken)
+        fetchData(apiURL + "getAlbumsDB?formato=" + e.target.id, "get", false, false, loginToken)
             .then(res => {
                 if (res.status === 401) {
-                    removeDataInLocalStoreage(spotify_token_key_ls);
+                    removeDataInLocalStorage(spotify_token_key_ls);
                     isSpotifyTokenLocalStorage();
                     return;
                 }
                 if (res.status === 403) {
-                    removeDataInLocalStoreage(login_token_key_ls);
+                    removeDataInLocalStorage(login_token_key_ls);
                     isSpotifyTokenLocalStorage();
                     return;
                 }
@@ -200,14 +185,14 @@ miFormatoDiv.forEach((formatoDiv) => {
                 if (res.bandAlbuns.length === 0) {
                     miFormatoDiv.innerHTML = `
                 <article>
-                    <h2><i>Todabia no has guardado ningun albun de este formato en tu biblioteca</i></h2>
+                    <h2><i>Todavía no has guardado ningún álbum de este formato en tu biblioteca</i></h2>
                     <a href="./albuns.HTML">->Volver a mi biblioteca</a>
                 </article>
                 `;
                     return;
                 }
                 miFormatoDiv.innerHTML =
-                    "<h4>Listado de albunes de bandas" + res.bandAlbuns[0].albumInfo.formato + "</h4>";
+                    "<h4>Listado de álbumes de bandas" + res.bandAlbuns[0].albumInfo.formato + "</h4>";
                 const uniqueBands = [...new Set(res.bandAlbuns.map(item => item.bandAlbuns))];
                 for (let i = 0; i < uniqueBands.length; i++) {
                     miFormatoDiv.innerHTML += `<b><a href="#" id="${uniqueBands[i]}">->${i + 1}- ${uniqueBands[i]}</a></b>`;
@@ -218,32 +203,31 @@ miFormatoDiv.forEach((formatoDiv) => {
     });
 });
 
-// prototipo de borrado de albunes/musica/video
-
+// Prototipo de borrado de álbumes/música/vídeo
 function deleteAlbumDB(resultDivAlbuns, formato) {
     const btnaddalbun = resultDivAlbuns.querySelectorAll("./albun_boton");
     btnaddalbun.forEach((btn) => {
         btn.addEventListener("click", async (evento) => {
             Swal.fire({
-                title: "Seguro quieres eliminar este albun de tu biblioteca?",
+                title: "¿Estás seguro de que quieres eliminar este álbum de tu biblioteca?",
                 text: "",
                 icon: "",
                 showCancelButton: true,
                 confirmButtonColor: "cadetblue",
                 showCancelButtonColor: "rgb(255 95 95)",
-                confirmButtonText: "SI!"
+                confirmButtonText: "¡Sí!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     const login_token = getDataInLocalStorage(login_token_key_ls);
                     fetchData(apiURL + "deleteAlbumDB", "delete", { albumID: evento.target.id, formato }, false, login_token)
                         .then((res) => {
                             if (res.status === 401) {
-                                removeDataInLocalStoreage(spotify_token_key_ls);
+                                removeDataInLocalStorage(spotify_token_key_ls);
                                 isSpotifyTokenLocalStorage();
                                 return;
                             }
                             if (res.status === 403) {
-                                removeDataInLocalStoreage(login_token_key_ls);
+                                removeDataInLocalStorage(login_token_key_ls);
                                 isLoginTokenInLocalStorage();
                                 return;
                             }
@@ -252,62 +236,14 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
                                 return;
                             }
                             Swal.fire({
-                                title: "album borrado",
+                                title: "Álbum borrado",
                                 text: res.message,
                                 icon: "success"
-                            }).then(() => location.reload())
+                            }).then(() => location.reload());
                         });
                 }
             });
         });
     });
+
 }
-// estos son los posibles botones con falta de ajustes y darle sentido a cada uno
-// aun hay que darle sentido a los inputs los nombres que le puse en el html y creo que faltan mas botones que no tienen codigo en js
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const options = {
-// 	method: 'POST',
-// 	headers: {
-// 		'content-type': 'application/x-www-form-urlencoded',
-// 		'X-RapidAPI-Key': '4c62be50e4msh41c41963f39f872p1a9105jsndd1693db3af4',
-// 		'X-RapidAPI-Host': 'iTunesvolodimir-kudriachenkoV1.p.rapidapi.com'
-// 	},
-// 	body: new URLSearchParams({
-// 		country: '<REQUIRED>',
-// 		term: '<REQUIRED>'
-// 	})
-// };
-
-// try {
-// 	const response = await fetch(url, options);
-// 	const result = await response.text();
-// 	console.log(result);
-// } catch (error) {
-// 	console.error(error);
-// }
-
-
-// esto es el posible procesador de musica
-// ya que tengo que analizar el de spotify
-// analizar el codigo con chat gpt
-
-// el codigo del segundo boton es el posible codigo de musica par ahcer las peticiones
-
-// ver paginas similares a la que queremos ahcer y mas opciones botones estilos y demas
-
-// en caso de que sobre el tiempo intentar hacer la barra de reproduccion de sonido
-// botones de control de audio SVG, reproductor de musica SVG
-
-// Importante aun no arranca el servidor ver como hacerlo y en que estamos fallando
