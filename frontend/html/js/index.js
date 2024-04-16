@@ -249,5 +249,12 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
 }
 
 
+
 // Aun falta completar el codigo en siertas partes y convinarlo con el backen
 // Y aun no tenemos el token ni al Api de spotify
+
+// bitacora posiblemente final llegue al punto de que ya no entiendo nada no se como acoplarlo y siento
+// que si sigo aplicando la de chatgpt no are nada
+// almenos si supiera que hace cada cosa y como se conecta talvez lo aria
+// pero para mi ya fue F noma
+// tengo que empesar desde 0 no puedo mas
