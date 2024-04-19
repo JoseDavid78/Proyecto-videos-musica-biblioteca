@@ -1,7 +1,6 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -20,6 +19,9 @@
     "electron": "^29.3.0"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  }
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.19.2"
+  },
+  "keywords": [],
+  "description": ""
 }
