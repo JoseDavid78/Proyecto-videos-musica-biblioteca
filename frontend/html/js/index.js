@@ -1,8 +1,4 @@
-// importante leer lo que hay en el drive  aun nos falta la api no la emos probado este link es por parte de linkeding es  un 
-// mini tutorial de como usar las tokens de spotify (https://es.linkedin.com/pulse/consumiendo-la-api-de-spotify-en-angular-standalone-francisco-javier)
-// dos la base de datos esta incompleta y aun nos falata el como gestionarla ademas de que este bien relacionada
-// tres la interfaz que viene siendo el diseño visual de la pagina estamos en 0 ver como podemos usar el figma o canva para hacernos una idea
-// cuatro comprobar si las rutas estan bien hechas y si falta alguna otra
+// la base de datos esta fallando algo subsanarlo y que quede impecable con las conecciones
 
 // Importar las funciones necesarias
 import {
@@ -27,51 +23,23 @@ const botonUsuario = document.querySelector("#boton_usuario");
 const botonEntrada = document.querySelector("#boton_entrada");
 const miFormatoDiv = document.querySelectorAll(".formato-div");
 
-// URL de la API de Spotify y de iTunes
-const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";
-const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic';
+// Evento de entrada
+botonEntrada.addEventListener("click", () => {
+    const entrada = resultadoInput.value.trim();
 
-// Evento clic para buscar canciones
-boton.addEventListener("click", () => {
-    const nombreCancion = resultadoInput.value.trim();
-
-    if (nombreCancion.length === 0) {
-        alert("Por favor, introduce una canción.");
+    if (entrada.length == 0) {
+        alert("Por favor, introduce una entrada.");
         return;
     }
 
-    fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", {
-        method: "get",
+    fetch(url, {
+        method: 'get',
         headers: {
-            "x-rapidapi-host": "spotify23.p.rapidapi.com",
-            "x-rapidapi-key": "<TU_CLAVE_API_RAPIDAPI>",
-            "useQueryString": true
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data);
-        // Procesar la respuesta aquí
-    })
-    .catch(error => alert(error));
-});
-
-// Evento clic para buscar vídeos
-boton2.addEventListener("click", () => {
-    const nombreVideo = inputResultado.value.trim();
-
-    if (nombreVideo.length === 0) {
-        alert("Por favor, introduce el nombre de un video.");
-        return;
-    }
-
-    fetch(url + encodeURIComponent(nombreVideo), {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            'X-RapidAPI-Key': '4c62be50e4msh41c41963f39f872p1a9105jsndd1693db3af4',
-            'X-RapidAPI-Host': 'iTunesvolodimir-kudriachenkoV1.p.rapidapi.com'
-        }
+            // Aquí van las cabeceras necesarias
+        },
+        body: JSON.stringify({
+            nombre: resultadoInput.value
+        })
     })
     .then(res => res.json())
     .then(data => {
@@ -135,23 +103,27 @@ botonUsuario.addEventListener("click", () => {
     .catch(error => alert(error));
 });
 
-// Evento de entrada
-botonEntrada.addEventListener("click", () => {
-    const entrada = resultadoInput.value.trim();
 
-    if (entrada.length == 0) {
-        alert("Por favor, introduce una entrada.");
+// URL de la API de Spotify y de iTunes
+const apiurl = "https://spotify23.p.rapidapi.com/search/?q=";
+const url = 'https://itunesvolodimir-kudriachenkov1.p.rapidapi.com/searchMusic';
+
+// Evento clic para buscar canciones
+boton.addEventListener("click", () => {
+    const nombreCancion = resultadoInput.value.trim();
+
+    if (nombreCancion.length === 0) {
+        alert("Por favor, introduce una canción.");
         return;
     }
 
-    fetch(url, {
-        method: 'get',
+    fetch(apiurl + encodeURIComponent(nombreCancion) + "&type=multi&offset=0&limit=10&numberOfTopResults=5", {
+        method: "get",
         headers: {
-            // Aquí van las cabeceras necesarias
-        },
-        body: JSON.stringify({
-            nombre: resultadoInput.value
-        })
+            "x-rapidapi-host": "spotify23.p.rapidapi.com",
+            "x-rapidapi-key": "<TU_CLAVE_API_RAPIDAPI>",
+            "useQueryString": true
+        }
     })
     .then(res => res.json())
     .then(data => {
@@ -160,6 +132,32 @@ botonEntrada.addEventListener("click", () => {
     })
     .catch(error => alert(error));
 });
+
+// Evento clic para buscar vídeos
+boton2.addEventListener("click", () => {
+    const nombreVideo = inputResultado.value.trim();
+
+    if (nombreVideo.length === 0) {
+        alert("Por favor, introduce el nombre de un video.");
+        return;
+    }
+
+    fetch(url + encodeURIComponent(nombreVideo), {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'X-RapidAPI-Key': '4c62be50e4msh41c41963f39f872p1a9105jsndd1693db3af4',
+            'X-RapidAPI-Host': 'iTunesvolodimir-kudriachenkoV1.p.rapidapi.com'
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data);
+        // Procesar la respuesta aquí
+    })
+    .catch(error => alert(error));
+});
+
 
 // Evento para mostrar álbumes de bandas
 miFormatoDiv.forEach((formatoDiv) => {
@@ -250,11 +248,10 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
 
 
 
-// Aun falta completar el codigo en siertas partes y convinarlo con el backen
-// Y aun no tenemos el token ni al Api de spotify
 
-// bitacora posiblemente final llegue al punto de que ya no entiendo nada no se como acoplarlo y siento
-// que si sigo aplicando la de chatgpt no are nada
-// almenos si supiera que hace cada cosa y como se conecta talvez lo aria
-// pero para mi ya fue F noma
-// tengo que empesar desde 0 no puedo mas
+// Y aun no tenemos el token ni al Api de spotify
+// Instalas en extenciones LIVE SERVER para que cree una servidor artificial asi se subsana el error del cors FILE://
+// aun falta completar el codigo de inicio de cesion y el de entrada casi ya esta luego solo es acoplarlo
+// darle estilos al html espacioUsuario.html 
+// solucionar los export de las funciones
+// EspacionUsuarios.js y espascionUsuarion.html tienen que fucionarse para que tengan sentido (esto ulitmo sera opcional ya que no sabemos si lograremos terminar todo)

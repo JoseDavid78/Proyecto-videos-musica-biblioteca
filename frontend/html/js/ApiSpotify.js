@@ -1,6 +1,4 @@
 const idSpotify = "http GET https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy \"";
-const Authoritation = "Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'";
-const ENDPOINT = "https://api.spotify.com/v1/albums/{id}";
 const id = "4aawyAB9vmqN3uQ7FjRGTy";
 
 // Posible respuesta
@@ -115,3 +113,5 @@ const api = {
     ENDPOINT,
     id
   }
+  // const Authoritation = "Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'";
+// const ENDPOINT = "https://api.spotify.com/v1/albums/{id}";
