@@ -1,18 +1,14 @@
 const apiURL = "http://localhost:3000/api/v1/"; // esta es la url a la que hay que mandar a spotify para que se redireccione y pueda acceder a nuestro codigo
-const spotify_token_key_LS = "spotify_token";
-const login_token_key_LS = "login_token";
+const spotify_token_key_LS = "BQDjIVRLtolOMzvxBylb1bpZk4HyXmkKrnzd-DFpQ9FSa897RNToTV98Zy8j0skm9wVl8KtrgkGC4fWIRTNI3eM6kWkeKp9acfq4J5bl0La3yRyoB28";
+const login_token_key_LS = "Bearer";
 
-// const client_ID = "dfef6631d550499ea46563873d6f184a";
-// const clien_secret = "8241f492754d4f7aae5f57a0b328b91d";
-
-// segun lo que vi esto es importante para que pueda funcionar el token y la api
 
 export {
   apiURL,
   spotify_token_key_LS,
-  login_token_key_LS,
-  // client_ID,
-  // clien_secret
+  login_token_key_LS
 };
 
-// buscar en youtube como sacar el token hay te lo indica 
+// buscar en youtube como sacar el token hay te lo indica
+// instalar postman para hacer pruebas de el token y el acceso
+// aqui la url que te dice como obtener el token  https://es.linkedin.com/pulse/consumiendo-la-api-de-spotify-en-angular-standalone-francisco-javier

@@ -249,9 +249,8 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
 
 
 
-// Y aun no tenemos el token ni al Api de spotify
+
 // Instalas en extenciones LIVE SERVER para que cree una servidor artificial asi se subsana el error del cors FILE://
 // aun falta completar el codigo de inicio de cesion y el de entrada casi ya esta luego solo es acoplarlo
-// darle estilos al html espacioUsuario.html 
-// solucionar los export de las funciones
-// EspacionUsuarios.js y espascionUsuarion.html tienen que fucionarse para que tengan sentido (esto ulitmo sera opcional ya que no sabemos si lograremos terminar todo)
+// EspacionUsuarios.js y espascionUsuarion.html tienen que fucionarse para que tengan sentido (esto ulitmo sera opcional ya que no sabemos si lograremos terminar todo
+// inicializar la ap web de arman y ver videos de como consumir la api de spotify o como lo ponen para implementarlo en tu codigo
