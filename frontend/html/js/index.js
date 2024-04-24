@@ -254,3 +254,5 @@ function deleteAlbumDB(resultDivAlbuns, formato) {
 // aun falta completar el codigo de inicio de cesion y el de entrada casi ya esta luego solo es acoplarlo
 // EspacionUsuarios.js y espascionUsuarion.html tienen que fucionarse para que tengan sentido (esto ulitmo sera opcional ya que no sabemos si lograremos terminar todo
 // inicializar la ap web de arman y ver videos de como consumir la api de spotify o como lo ponen para implementarlo en tu codigo
+// necesito leer esto y entenderlo es muy interesante https://developer.spotify.com/blog/2023-07-03-typescript-sdk
+// otro linck de interes https://developer.spotify.com/blog/2023-07-03-typescript-sdk
